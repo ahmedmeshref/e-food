@@ -1,4 +1,4 @@
-# e-resturant
+# E-Food
 We are heading to a new digital world where the machines are going to help humans
 to do everything. We got inspired by the world around us and the digitalization happening
 everywhere to build a full cashier for a restaurant without any human interaction and solve the problem of customers waiting in the 
