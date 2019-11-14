@@ -1,29 +1,34 @@
 from user_class import User
 
 class Customer(User):
-    def make_order:
-        super(). view_item() # showing the food and drinks
-        selected_meal = the user selected meal
-        meal_quantity = input int the number of meals you want
-        selected_drink = user select a drink
-        drink_quantity = input int the number of items the user want to order
-        confirm = press yes or no
-        If confirm is yes:
-        Return selected_meal, meal_quantity, selected_drink, drink_quantity
-        Else:
-        input(“Do you wish to re-order again!)
-        Make_order called again
+    def confirm_order(self, orders):
+        index = 0
+        total_money = 0
+        print("--------------- Your Order -------------------")
+        for item in orders:
+            print(str(index) + ".", item[0], ":", item[1])
+            total_money += item[1]
+            index += 1
+        confirm = input("--------------- Confirm your order -------------------\n"
+                        "1. Confirm \n"
+                        "2. Delete an item \n"
+                        "3. cancel \n"
+                        "Enter a number: ")
+        if confirm == "2":
+            delete_element = input("Enter number of the element to delete: ")
+            # to complete tomorrow
+        return confirm, total_money
 
-    def make_payments(selected_meal, meal_quantity, selected_drink, drink_quantity):
-        Total_money = Calculate total price from the variables above
-        print Total_money
-        confirm = press yes or no
-        If confirm is yes:
-        Return Total_money
-        Else:
-        Cancel the order
+    def payments(self, order_price, visa_list, balance):
+        visa = input("Enter your visa number: ")
+        if visa in visa_list:
+            if order_price <= balance[visa_list.index(visa)]:
+                return "Order placed successfully"
+            else:
+                return "No sufficient balance"
 
-    def review:
-        review_rate = input from user asking scale [1-5] the service
+
+
+    def review(self):
+        review_rate = input("How many starts you rate the service (out of 5): ")
         return review_rate
-        print “Thank you very much for your feedback”

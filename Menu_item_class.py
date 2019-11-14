@@ -1,13 +1,9 @@
 class MenuItem:
-    def __init__(self, item_name, item_price,item_ratings):
+    def __init__(self, item_name, item_description, item_price):
         self.Item_name = item_name
+        self.item_description = item_description
         self.Item_price = item_price
-        self.Item_ratings = item_ratings
 
-
-    def info(self):
+    def __str__(self):
         return self.Item_name + ': $' + str(self.Item_price)
 
-    def get_total_price(self, count):
-        total_price = self.Item_price * count
-        return round(total_price)
