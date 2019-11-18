@@ -19,30 +19,28 @@ hot_chocolate = ["Hot chocolate", "Hot Extra black chocolate", 10]
 water = ["Water", "pure safee water", 5]
 drink_list = [coffee, lemonade, tea, hot_chocolate, water]
 
-
 # list of visas in our system with the balance
 visa_list = ["001", "002"]
 balance = [2000, 4000]
 
-# rating for our service
-service_rate = 0
 
-
-def food_menu():
+def f_menu():
     print("---------------------- Food Menu ----------------------")
+    print("   Name" + " " * 20 + "Price")
     index = 0
     for meal in food_list:
         item = Food(meal[0], meal[1], meal[2])
-        print(str(index) + ".", str(item))
+        item.food_menu(index)
         index += 1
 
 
-def drinks_menu():
+def d_menu():
     print("---------------------- Drinks Menu ----------------------")
+    print("   Name" + " " * 20 + "Price")
     index = 0
     for drink in drink_list:
         item = Drink(drink[0], drink[1], drink[2])
-        print(str(index) + ".", str(item))
+        item.drinks_menu(index)
         index += 1
 
 
@@ -53,13 +51,13 @@ def customer_order():
     order_items = []
     meal = input("Do you want a meal? (yes or no): ")
     while meal == "yes":
-        food_menu()
+        f_menu()
         selected_meal = int(input("Enter the number of selected meal: "))
         order_items.append([food_list[selected_meal][0], food_list[selected_meal][-1]])
         meal = input("Do you want another meal? (yes or no): ")
     drink = input("Do you want a drink? (yes or no): ")
     while drink == "yes":
-        drinks_menu()
+        d_menu()
         selected_drink = int(input("Enter number of selected drink: "))
         order_items.append([drink_list[selected_drink][0], drink_list[selected_drink][-1]])
         drink = input("Do you want another drink? (yes or no): ")
@@ -70,7 +68,7 @@ def customer_payment(order_items):
     global service_rate
     confirm, order_price = user.confirm_order(order_items)
     if confirm == "1":
-        order_status= user.payments(order_price, visa_list, balance)
+        order_status = user.payments(order_price, visa_list, balance)
         service_rate = user.review()
         return order_status
 

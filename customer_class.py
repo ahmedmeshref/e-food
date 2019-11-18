@@ -27,8 +27,6 @@ class Customer(User):
             else:
                 return "No sufficient balance"
 
-
-
-    def review(self):
-        review_rate = input("How many starts you rate the service (out of 5): ")
-        return review_rate
+    # def review(self):
+    #     review_rate = input("How many starts you rate the service (out of 5): ")
+    #     return review_rate
