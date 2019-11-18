@@ -49,31 +49,46 @@ def customer_order():
     name = input("What is your name? ")
     user = Customer(name)
     order_items = []
-    meal = input("Do you want a meal? (yes or no): ")
-    while meal == "yes":
+    meal = input("Do you want a meal? (1 for yes): ")
+    while meal == "1":
         f_menu()
         selected_meal = int(input("Enter the number of selected meal: "))
-        order_items.append([food_list[selected_meal][0], food_list[selected_meal][-1]])
-        meal = input("Do you want another meal? (yes or no): ")
-    drink = input("Do you want a drink? (yes or no): ")
-    while drink == "yes":
+        f_quantity = int(input("quantity: "))
+        order_items.append([food_list[selected_meal][0], food_list[selected_meal][-1], f_quantity])
+        meal = input("Do you want another meal? (1 for yes): ")
+    drink = input("Do you want a drink? (1 for yes): ")
+    while drink == "1":
         d_menu()
         selected_drink = int(input("Enter number of selected drink: "))
-        order_items.append([drink_list[selected_drink][0], drink_list[selected_drink][-1]])
-        drink = input("Do you want another drink? (yes or no): ")
+        d_quantity = int(input("quantity: "))
+        order_items.append([drink_list[selected_drink][0], drink_list[selected_drink][-1], d_quantity])
+        drink = input("Do you want another drink? (1 for yes): ")
     return customer_payment(order_items)
 
 
-def customer_payment(order_items):
-    global service_rate
-    confirm, order_price = user.confirm_order(order_items)
-    if confirm == "1":
-        order_status = user.payments(order_price, visa_list, balance)
-        service_rate = user.review()
-        return order_status
 
-    elif confirm == "3":
+def customer_payment(order_items):
+    order_price = user.confirm_order(order_items)
+    confirm = input("--------------- Confirm your order -------------------\n"
+                    "1. Confirm \n"
+                    "2. Delete an item \n"
+                    "3. cancel \n"
+                    "Enter a number: ")
+    while confirm == "2":
+        deleted_item = int(input("Enter of the element to delete: "))
+        del order_items[deleted_item]
+        order_price = user.confirm_order(order_items)
+        if len(order_items) == 0:
+            return "Order canceled successfully"
+        confirm = input("--------------- Confirm your order -------------------\n"
+                        "1. Confirm \n"
+                        "2. Delete an item \n"
+                        "3. cancel \n"
+                        "Enter a number: ")
+    if confirm == "3":
         return "Order canceled successfully"
+    order_status = user.payments(order_price, visa_list, balance)
+    return order_status
 
 
 print(customer_order())
