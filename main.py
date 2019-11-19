@@ -1,6 +1,7 @@
 from Food import Food
 from Drink import Drink
 from customer_class import Customer
+from super_user_class import SuperUser
 
 # list of food
 # food_1 =  [name, description, price]
@@ -23,6 +24,10 @@ drink_list = [coffee, lemonade, tea, hot_chocolate, water]
 visa_list = ["001", "002"]
 balance = [2000, 4000]
 
+# list of super users with their respective passwords
+user_name = ["ahmed", "mohamed"]
+user_password = ["000", "111"]
+
 
 def f_menu():
     print("---------------------- Food Menu ----------------------")
@@ -44,6 +49,7 @@ def d_menu():
         index += 1
 
 
+# Customer control flow
 def customer_order():
     global user
     name = input("What is your name? ")
@@ -64,7 +70,6 @@ def customer_order():
         order_items.append([drink_list[selected_drink][0], drink_list[selected_drink][-1], d_quantity])
         drink = input("Do you want another drink? (1 for yes): ")
     return customer_payment(order_items)
-
 
 
 def customer_payment(order_items):
@@ -91,4 +96,101 @@ def customer_payment(order_items):
     return order_status
 
 
-print(customer_order())
+# Super user control flow
+
+# editing a price of an existing item
+def edit_food_price():
+    f_menu()
+    food_to_edit = int(input("Select a food number: "))
+    new_price = int(input("New price:"))
+    food_list[food_to_edit][-1] = new_price
+    print("Price updated successfully")
+
+
+def edit_drink_price():
+    d_menu()
+    drink_to_edit = int(input("Select a drink number: "))
+    new_price = int(input("New price:"))
+    drink_list[drink_to_edit][-1] = new_price
+    print("Price updated successfully")
+
+
+def add_new_food():
+    meal_name = input("Meal name:")
+    meal_description = input("Meal description: ")
+    meal_price = int(input("Price: "))
+    food_list.append([meal_name, meal_description, meal_price])
+    print(meal_name, "added successfully")
+
+
+def add_new_drink():
+    drink_name = input("Meal name:")
+    drink_description = input("Meal description: ")
+    drink_price = int(input("Price: "))
+    drink_list.append([drink_name, drink_description, drink_price])
+    print(drink_name, "added successfully")
+
+
+def delete_food():
+    f_menu()
+    food_to_delete = int(input("Enter the number of item: "))
+    del food_list[food_to_delete]
+    print("Item deleted successfully")
+
+
+def delete_drink():
+    d_menu()
+    drink_to_delete = int(input("Enter the number of item: "))
+    del drink_list[drink_to_delete]
+    print("Item deleted successfully")
+
+
+def view_items():
+    f_menu()
+    d_menu()
+
+
+def super_user_menu():
+    print("---------------------- Menu ----------------------")
+    selected_action = input("1- View all items\n"
+                            "2- Edit food price     3- Edit drink price\n"
+                            "4- Add new food        5- Add new drink\n"
+                            "6- Delete food         7- Delete drink\n"
+                            "Select a number: ")
+    if selected_action == "1":
+        view_items()
+    elif selected_action == "2":
+        edit_food_price()
+    elif selected_action == "3":
+        edit_drink_price()
+    elif selected_action == "4":
+        add_new_food()
+    elif selected_action == "5":
+        add_new_drink()
+    elif selected_action == "6":
+        delete_food()
+    else:
+        delete_drink()
+
+
+# log_in validation
+def validate():
+    user_1 = SuperUser("User")
+    validation = user_1.log_in(user_name, user_password)
+    while validation == 0:
+        validation = user_1.log_in(user_name, user_password)
+    super_user_menu()
+
+
+# Main menu to order for customers or log in for super_user
+user_type = input("1- Order \n"
+                  "2- Log in (Owner) \n"
+                  "Select a number: ")
+
+if user_type == "1":
+    print(customer_order())
+else:
+    validate()
+    run_again = input("Do you want another operation? (1 for yes): ")
+    while run_again == "1":
+        super_user_menu()
