@@ -29,6 +29,7 @@ user_name = ["ahmed", "mohamed"]
 user_password = ["000", "111"]
 
 
+# defining food menu function
 def f_menu():
     print("---------------------- Food Menu ----------------------")
     print("   Name" + " " * 20 + "Price")
@@ -37,8 +38,10 @@ def f_menu():
         item = Food(meal[0], meal[1], meal[2])
         item.food_menu(index)
         index += 1
+    print("--------------------------------------------------------")
 
 
+# defining drink menu function
 def d_menu():
     print("---------------------- Drinks Menu ----------------------")
     print("   Name" + " " * 20 + "Price")
@@ -47,6 +50,7 @@ def d_menu():
         item = Drink(drink[0], drink[1], drink[2])
         item.drinks_menu(index)
         index += 1
+    print("----------------------------------------------------------")
 
 
 # Customer control flow
@@ -72,6 +76,7 @@ def customer_order():
     return customer_payment(order_items)
 
 
+# defining customer payment function
 def customer_payment(order_items):
     order_price = user.confirm_order(order_items)
     confirm = input("--------------- Confirm your order -------------------\n"
@@ -107,6 +112,7 @@ def edit_food_price():
     print("Price updated successfully")
 
 
+# defining editing drinking from the list
 def edit_drink_price():
     d_menu()
     drink_to_edit = int(input("Select a drink number: "))
@@ -115,6 +121,7 @@ def edit_drink_price():
     print("Price updated successfully")
 
 
+# defining a function to add new food to the list
 def add_new_food():
     meal_name = input("Meal name:")
     meal_description = input("Meal description: ")
@@ -123,6 +130,7 @@ def add_new_food():
     print(meal_name, "added successfully")
 
 
+# function to add new drink to the list
 def add_new_drink():
     drink_name = input("Meal name:")
     drink_description = input("Meal description: ")
@@ -131,6 +139,7 @@ def add_new_drink():
     print(drink_name, "added successfully")
 
 
+# function to delete a food from the available list
 def delete_food():
     f_menu()
     food_to_delete = int(input("Enter the number of item: "))
@@ -138,6 +147,7 @@ def delete_food():
     print("Item deleted successfully")
 
 
+# function to delete a drink from the available list
 def delete_drink():
     d_menu()
     drink_to_delete = int(input("Enter the number of item: "))
@@ -145,11 +155,13 @@ def delete_drink():
     print("Item deleted successfully")
 
 
+# function to view food and drink items
 def view_items():
     f_menu()
     d_menu()
 
 
+# superuser function
 def super_user_menu():
     print("---------------------- Menu ----------------------")
     selected_action = input("1- View all items\n"
@@ -185,7 +197,7 @@ def validate():
 # Main menu to order for customers or log in for super_user
 user_type = input("1- Order \n"
                   "2- Log in (Owner) \n"
-                  "Select a number: ")
+                  "Select a choice number to proceed: ")
 
 if user_type == "1":
     print(customer_order())

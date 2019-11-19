@@ -1,3 +1,5 @@
+
+# defining a MenuItem class
 class MenuItem:
     def __init__(self, item_name, item_description, item_price):
         self.Item_name = item_name
@@ -6,4 +8,3 @@ class MenuItem:
 
     def __str__(self):
         return self.Item_name + ': $' + str(self.Item_price)
-

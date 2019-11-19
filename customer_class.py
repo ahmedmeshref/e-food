@@ -1,6 +1,6 @@
 from user_class import User
 
-
+# Defining Customer class
 class Customer(User):
     def confirm_order(self, orders):
         index = 0

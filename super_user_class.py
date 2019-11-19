@@ -1,5 +1,7 @@
 from user_class import User
 
+
+# defining a SuperUser class
 class SuperUser(User):
     def log_in(self, user_name, user_password):
         user_name_input = input("Enter your user name: ").lower()
@@ -12,4 +14,3 @@ class SuperUser(User):
         else:
             print("Invalid user name")
             return 0
-
